@@ -1,16 +1,20 @@
 class BrightIdeasController < ApplicationController
   before_action :set_bright_idea, only: [:show, :edit, :update, :destroy]
+  before_action :set_people, only: [:show]
+  before_action :set_like_count, only: [:index, :show, :edit, :update, :destroy]
 
   # GET /bright_ideas
   # GET /bright_ideas.json
   def index
-    @bright_ideas = BrightIdea.all
+    @bright_ideas = BrightIdea.all.sort {|a,b| b.likes.count <=> a.likes.count}
     @bright_idea = BrightIdea.new
+    @like = Like.new
   end
 
   # GET /bright_ideas/1
   # GET /bright_ideas/1.json
   def show
+    @people = Like.where(bright_idea_id: params[:id]).select('distinct on (user_id) *')
   end
 
   # GET /bright_ideas/new
@@ -64,6 +68,14 @@ class BrightIdeasController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_bright_idea
       @bright_idea = BrightIdea.find(params[:id])
+    end
+
+    def set_people
+      @people = Like.where(bright_idea_id: params[:id])
+    end
+
+    def set_like_count
+      @like_count = Like.where(bright_idea_id: params[:id]).count
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

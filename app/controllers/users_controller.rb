@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_idea_count, only: [:show]
 
   # GET /users
   # GET /users.json
@@ -27,7 +28,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      flash[:success] = "You have successfully registered as a Company"
+      flash[:success] = "You have successfully registered as a User"
       redirect_to "/"
     else
       flash[:errors] = @user.errors.full_messages
@@ -63,6 +64,10 @@ class UsersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
+    end
+
+    def set_idea_count
+      @idea_count = BrightIdea.where(user_id: params[:id]).count
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

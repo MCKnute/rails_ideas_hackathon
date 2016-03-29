@@ -24,12 +24,12 @@
 	<% end %>
 
 	<% if flash[:success] %>
-		<p>
+		<p style="background-color: #b3de69; text-align: center">
 	    <%= flash[:success] %><br />
 		</p>
 	<% end %>
 	<% if flash[:errors] %>
-		<p>
+		<p style="background-color: #fbb4ae; text-align: center">
 	    <% flash[:errors].each do |e| %>
           <%= e %> <br />
           <% end %>

@@ -1,9 +1,26 @@
-<p id="notice"><%= notice %></p>
-
 <p>
-  <strong>Idea:</strong>
+  <h3>Idea by <%= User.find(@bright_idea.user_id).alias %>:</h3>
   <%= @bright_idea.idea %>
 </p>
 
-<%= link_to 'Edit', edit_bright_idea_path(@bright_idea) %> |
-<%= link_to 'Back', bright_ideas_path %>
+<h4>People who have Liked this idea:</h4>
+<table>
+  <thead>
+    <tr>
+      <th>Alias</th>
+      <th>Name</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @people.each do |person| %>
+	    <tr>
+	        <td><%= User.find(person.user_id).alias %></td>
+	        <td><%= User.find(person.user_id).name %></td>
+	     </tr>
+     <% end %>
+   </tbody>
+</table>
+
+
+<%= link_to 'Back to Ideas', ideas_path %>

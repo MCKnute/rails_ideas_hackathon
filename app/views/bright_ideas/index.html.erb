@@ -8,20 +8,28 @@
     <tr>
       <th>Aliases</th>
       <th>Ideas</th>
-      <th>Likes</th>
-      <th> </th>
+      <th></th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
 
   <tbody>
     <% @bright_ideas.each do |bright_idea| %>
       <tr>
-        <td><a href="users/<%= bright_idea.user_id %>"><%= User.find(bright_idea.user_id).alias %></a> says:
+        <td><a href="users/<%= bright_idea.user_id %>"><%= User.find(bright_idea.user_id).alias %></a> says:</td>
         <td>"<%= bright_idea.idea %>"</td>
-        <td>Like # of Likes</td>
+        <td>
+          <%= form_for(@like) do |like| %>
+            <input name="like[user_id]" value="<%= current_user.id %>" type="hidden">
+            <input name="like[bright_idea_id]" value="<%= bright_idea.id %>" type="hidden">
+            <%= like.submit "Like!" %>
+          <% end %>
+
+        </td>
+        <td><a href="/bright_ideas/<%= bright_idea.id %>"> # of Likes: <%= Like.where(bright_idea_id: bright_idea.id).count %></a></td>
         <td>
           <% if current_user.id == bright_idea.user_id %>
-        <%= link_to 'Edit', edit_bright_idea_path(bright_idea) %> 
         <%= link_to 'Destroy', bright_idea, method: :delete, data: { confirm: 'Are you sure?' } %>
           <% end %>
         </td>
