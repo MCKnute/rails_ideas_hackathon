@@ -14,22 +14,22 @@
 	<% if current_user %>
 	 
 	<div class="row">
-	<form action='/sessions' method='post' style="float:right">
+	<form action='/sessions' method='post' style="width: 100%; text-align: center">
 	   <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
 	   <input type="hidden" name="_method" value="delete">
-	   <strong>Logged in as <%= current_user.alias %>!</strong>
+	   <strong>Logged in as <a href="users/<%= current_user.id %>"><%= current_user.alias %></a>!</strong>
 	   <input type='submit' value='Log Out' style="display: inline-block">
 	 </form>
 	</div>
 	<% end %>
 
 	<% if flash[:success] %>
-		<p style="background-color: #b3de69; text-align: center">
+		<p style="background-color: #b3de69; text-align: center; padding-top: 1em; padding-bottom: 1em">
 	    <%= flash[:success] %><br />
 		</p>
 	<% end %>
 	<% if flash[:errors] %>
-		<p style="background-color: #fbb4ae; text-align: center">
+		<p style="background-color: #fbb4ae; text-align: center; padding-top: 1em; padding-bottom: 1em">
 	    <% flash[:errors].each do |e| %>
           <%= e %> <br />
           <% end %>

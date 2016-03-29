@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :set_idea_count, only: [:show]
+  before_action :set_like_count, only: [:show]
 
   # GET /users
   # GET /users.json
@@ -68,6 +69,10 @@ class UsersController < ApplicationController
 
     def set_idea_count
       @idea_count = BrightIdea.where(user_id: params[:id]).count
+    end
+
+    def set_like_count
+      @like_count = Like.where(user_id: params[:id]).count
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
