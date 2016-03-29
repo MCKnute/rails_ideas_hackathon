@@ -1,22 +1,30 @@
-<p id="notice"><%= notice %></p>
+<h1>Bright Ideas Dashboard</h1>
 
-<h1>Listing Bright Ideas</h1>
+
+<%= render 'form' %>
 
 <table>
   <thead>
     <tr>
-      <th>Idea</th>
-      <th colspan="3"></th>
+      <th>Aliases</th>
+      <th>Ideas</th>
+      <th>Likes</th>
+      <th> </th>
     </tr>
   </thead>
 
   <tbody>
     <% @bright_ideas.each do |bright_idea| %>
       <tr>
-        <td><%= bright_idea.idea %></td>
-        <td><%= link_to 'Show', bright_idea %></td>
-        <td><%= link_to 'Edit', edit_bright_idea_path(bright_idea) %></td>
-        <td><%= link_to 'Destroy', bright_idea, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><a href="users/<%= bright_idea.user_id %>"><%= User.find(bright_idea.user_id).alias %></a> says:
+        <td>"<%= bright_idea.idea %>"</td>
+        <td>Like # of Likes</td>
+        <td>
+          <% if current_user.id == bright_idea.user_id %>
+        <%= link_to 'Edit', edit_bright_idea_path(bright_idea) %> 
+        <%= link_to 'Destroy', bright_idea, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +32,3 @@
 
 <br>
 
-<%= link_to 'New Bright idea', new_bright_idea_path %>

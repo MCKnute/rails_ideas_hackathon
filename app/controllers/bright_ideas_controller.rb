@@ -5,6 +5,7 @@ class BrightIdeasController < ApplicationController
   # GET /bright_ideas.json
   def index
     @bright_ideas = BrightIdea.all
+    @bright_idea = BrightIdea.new
   end
 
   # GET /bright_ideas/1
@@ -25,16 +26,14 @@ class BrightIdeasController < ApplicationController
   # POST /bright_ideas.json
   def create
     @bright_idea = BrightIdea.new(bright_idea_params)
-
-    respond_to do |format|
       if @bright_idea.save
-        format.html { redirect_to @bright_idea, notice: 'Bright idea was successfully created.' }
-        format.json { render :show, status: :created, location: @bright_idea }
+        flash[:success] = "You have successfully posted a new idea!"
+        redirect_to ideas_path
       else
-        format.html { render :new }
-        format.json { render json: @bright_idea.errors, status: :unprocessable_entity }
+        flash[:errors] = @bright_idea.errors.full_messages
+        redirect_to :back
       end
-    end
+  
   end
 
   # PATCH/PUT /bright_ideas/1
@@ -69,6 +68,6 @@ class BrightIdeasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def bright_idea_params
-      params.require(:bright_idea).permit(:idea)
+      params.require(:bright_idea).permit(:idea, :user_id)
     end
 end

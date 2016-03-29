@@ -40,7 +40,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        flash[:success] = "You have successfully registered as a Company"
+        flash[:success] = "You have successfully registered as a User"
         redirect_to user_path
       else
         flash[:errors] = @user.errors.full_messages
