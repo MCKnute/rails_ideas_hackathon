@@ -1,0 +1,35 @@
+<div class="register_form">
+  <h2>Register</h2>
+
+
+<form action="/users" method="post" role="form">
+  <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+  <p>
+    <label for="name">Name:</label>
+    <input type="text" class="form-control" name="user[name]" placeholder="Enter name" >
+  </p>
+
+   <p>
+    <label for="alias">Alias:</label>
+    <input type="text" class="form-control" name="user[alias]" placeholder="Enter last name" >
+  </p>
+
+   <p>
+    <label for="email">Email:</label>
+    <input type="email" class="form-control" name="user[email]" placeholder="Enter email" >
+  </p>
+  <p>
+    <label for="password">Password: <br />(must be over 8 characters long):</label>
+    <input type="password" class="form-control" name="user[password]" placeholder="Enter password"  minlength="8">
+  </p>
+  <p>
+    <label for="password_confirmation">Password Confirmation:</label>
+    <input type="password" class="form-control" name="user[password_confirmation]" placeholder="Enter password confirmation"  minlength="8">
+  </p>
+
+  <button type="submit" class="btn btn-default">Register</button>
+
+</form>
+
+
+</div>

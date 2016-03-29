@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Bright Ideas</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Idea</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @bright_ideas.each do |bright_idea| %>
+      <tr>
+        <td><%= bright_idea.idea %></td>
+        <td><%= link_to 'Show', bright_idea %></td>
+        <td><%= link_to 'Edit', edit_bright_idea_path(bright_idea) %></td>
+        <td><%= link_to 'Destroy', bright_idea, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Bright idea', new_bright_idea_path %>

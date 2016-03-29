@@ -1,0 +1,21 @@
+<%= form_for(@bright_idea) do |f| %>
+  <% if @bright_idea.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@bright_idea.errors.count, "error") %> prohibited this bright_idea from being saved:</h2>
+
+      <ul>
+      <% @bright_idea.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :idea %><br>
+    <%= f.text_area :idea %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
